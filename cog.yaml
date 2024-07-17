@@ -30,9 +30,11 @@ build:
     - "wandb==0.15.12"
     - "wavedrom==2.0.3.post3"
     - "Pygments==2.16.1"
+    - "packaging==24.1"
+    - "setuptools<70"
  
   run:
-    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.0.3/pget" && chmod +x /usr/local/bin/pget
+    - curl -f -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.8.2/pget_$(uname -s)_$(uname -m)" && chmod +x /usr/local/bin/pget
     - pip install flash_attn==2.3.3 --no-build-isolation
 
 # the model on replicate
