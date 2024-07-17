@@ -22,6 +22,7 @@ def check_zip_contents(zip_path):
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             # List all contents of the zip file
             zip_contents = zip_ref.namelist()
+            zip_root = zipfile.Path(zip_ref)
 
             if "data.json" not in zip_contents:
                 wrong_locations = [item for item in zip_contents if "data.json" in item]
@@ -29,7 +30,7 @@ def check_zip_contents(zip_path):
                 error_msgs.append(data_json_msg)
                 train_data_has_right_structure = False
 
-            if "images/" not in zip_contents:
+            if not (zip_root / "images").exists:
                 images_folder_msg = f"{zip_path} does not contain a folder named images in root."
                 error_msgs.append(images_folder_msg)
                 train_data_has_right_structure = False
